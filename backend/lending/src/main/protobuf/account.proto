@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.skp.payment.p2plending.lending.ui";
+
+message AuthenticationRequest {
+    string bankCode = 1;
+    string accountNo = 2;
+    string ownerName = 3;
+    string socialNo = 4;
+}
+
+message AuthenticationResponse {
+    string code = 1;
+    string message = 2;
+}
+
+service Account {
+    rpc authentication (AuthenticationRequest) returns (AuthenticationResponse) {}
+}

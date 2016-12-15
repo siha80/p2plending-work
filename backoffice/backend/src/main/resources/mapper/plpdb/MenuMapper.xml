@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skp.fintech.p2plending.backoffice.mapper.plpdb.MenuMapper">
+
+    <select id="selectUserMenuList" parameterType="string" resultType="com.skp.fintech.p2plending.backoffice.menu.application.MenuInformation">
+        SELECT c.menu_id as menuId
+               ,c.menu_nm as menuNm
+               ,c.path as path
+               ,c.parent_menu_id as parentMenuId
+               ,c.icon
+               ,ifnull(d.menu_id,c.menu_id) as group_menu
+               ,(SELECT count(1) FROM tb_bo_menu e WHERE e.parent_menu_id = c.menu_id) childNodeCnt
+               ,if(c.parent_menu_id='0','1','2') level
+        FROM tb_bo_user a
+            ,tb_bo_auth_menu b
+            ,tb_bo_menu c LEFT OUTER JOIN tb_bo_menu d ON c.parent_menu_id = d.menu_id
+        WHERE a.auth_id = b.auth_id
+        AND b.menu_id = c.menu_id
+        AND a.user_id = #{userId}
+        ORDER BY  group_menu, c.parent_menu_id, c.menu_id
+    </select>
+
+
+    <select id="selectSystemMenuList" parameterType="com.skp.fintech.p2plending.backoffice.menu.application.MenuInformation" resultType="com.skp.fintech.p2plending.backoffice.menu.application.MenuInformation">
+        SELECT  menuId
+                ,menuNm
+                ,path
+                ,parentMenuId
+                ,icon
+                ,group_menu
+                ,fullPath
+                ,childNodeCnt
+                ,level
+        FROM (
+                SELECT  a.menu_id as menuId
+                        ,a.menu_nm as menuNm
+                        ,a.path as path
+                        ,a.parent_menu_id as parentMenuId
+                        ,a.icon
+                        ,ifnull(b.menu_id,a.menu_id) as group_menu
+                        ,if(b.path is null, a.path, concat(b.path,'/',a.path )) fullPath
+                        ,(SELECT count(1) FROM tb_bo_menu c WHERE c.parent_menu_id = a.menu_id) childNodeCnt
+                        ,if(a.parent_menu_id='0','1','2') level
+                FROM tb_bo_menu a LEFT OUTER JOIN tb_bo_menu b ON a.parent_menu_id = b.menu_id
+                <where>
+                  <if test="menuNm != null and menuNm!= '' ">
+                    and a.menu_nm like CONCAT('%', #{menuNm}, '%')
+                  </if>
+                  <if test="menuId != null and menuId!= '' ">
+                    and a.menu_id = #{menuId}
+                  </if>
+                </where>
+                ORDER BY  group_menu, a.parent_menu_id, a.menu_id
+              ) a
+        <where>
+            <if test="path != null and path!= '' ">
+                and fullPath like CONCAT('%', #{path}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

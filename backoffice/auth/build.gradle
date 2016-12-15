@@ -1,0 +1,57 @@
+group 'com.skp.payment'
+buildscript {
+    ext {
+        springBootVersion = '1.4.2.RELEASE'
+    }
+    repositories {
+        maven { url "http://mvn.skplanet.com/content/groups/public" }
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        classpath('org.springframework:springloaded:1.2.5.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'backoffice-auth'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "http://mvn.skplanet.com/content/groups/public" }
+    mavenCentral()
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
+
+    runtime('org.springframework.boot:spring-boot-devtools')
+
+    compile('org.projectlombok:lombok')
+    compile('org.modelmapper:modelmapper:0.7.3' )
+    compile('joda-time:joda-time:2.6')
+    compile('com.sun.jersey:jersey-client:1.18.3')
+    compile('com.atlassian.crowd.client:atlassian-crowd-rest-client:1.4')
+
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}

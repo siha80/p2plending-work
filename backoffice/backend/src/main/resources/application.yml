@@ -1,0 +1,34 @@
+backoffice:
+  front:
+    server: http://localhost:3000
+  auth:
+    server: http://localhost:8081/
+    token:
+      key: P2PLENDINGADMINUSER!@#$$#@!
+
+
+logging:
+  level:
+    org:
+    springframework:
+      web: DEBUG
+
+spring:
+  datasource.plpdb:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.22.241.119:3306/plpdb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: plp_user
+    password: '!plp.buse2#'
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    filters: stat,wall,log4j
+  datasource.auth:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.22.241.119:3306/plpdb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: plp_user
+    password: '!plp.buse2#'
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    filters: stat,wall,log4j

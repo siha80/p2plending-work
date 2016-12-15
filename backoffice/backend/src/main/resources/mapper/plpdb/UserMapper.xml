@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skp.fintech.p2plending.backoffice.mapper.plpdb.UserMapper">
+
+    <select id="selectLoginUserInfo" parameterType="string" resultType="com.skp.fintech.p2plending.backoffice.user.application.UserInformation">
+        SELECT user_id as userId
+               ,auth_id as authId
+               ,status as status
+        FROM tb_bo_user a
+        WHERE a.user_id = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="com.skp.fintech.p2plending.backoffice.user.application.UserInformation">
+        INSERT INTO tb_bo_user(user_id, auth_id, status )
+        VALUES (#{userId}, #{authId}, #{status})
+    </insert>
+</mapper>

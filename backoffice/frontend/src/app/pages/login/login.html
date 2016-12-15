@@ -1,0 +1,33 @@
+<div class="auth-main">
+  <div class="auth-block">
+    <h1>P2P Lending Backoffice</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+      <div class="form-group row" [ngClass]="{'has-error': (!userId.valid && userId.touched), 'has-success': (userId.valid && userId.touched)}">
+        <label for="inputUserId3" class="col-sm-2 control-label">아이디</label>
+
+        <div class="col-sm-10">
+          <input [formControl]="userId" type="userId" class="form-control" id="inputUserId3" placeholder="사번">
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
+        <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
+
+        <div class="col-sm-10">
+          <input [formControl]="password" type="password" class="form-control" id="inputPassword3" placeholder="비밀번호">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">로그인</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="auth-sep"><span><span>Support Center</span></span></div>
+    관리자 문의 : 최준영(skp.cjy@sk.com)<br/>
+    기술지원 : 최준영(skp.cjy@sk.com)
+
+
+  </div>
+</div>

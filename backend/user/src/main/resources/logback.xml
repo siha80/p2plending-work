@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+
+    <!-- Simple file output -->
+    <appender name="BACKUP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/p2plending-user.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 64 MB -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+        <!-- <prudent>true</prudent> -->
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>p2plending-user.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 64 MB -->
+                <maxFileSize>64MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>1</maxHistory>
+        </rollingPolicy>
+
+        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+        <!-- <prudent>true</prudent> -->
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%highlight([%level]) - [%date] - [%logger]  %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+    <logger name="akka" level="DEBUG" >
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="BACKUP"/>
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="slf4j" level="INFO">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="BACKUP" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="BACKUP"/>
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger name="org.apache.kafka.clients" level="WARN">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="BACKUP"/>
+    </logger>
+</configuration>

@@ -1,0 +1,109 @@
+{
+  "path": "pages",
+  "children": [
+    {
+      "path": "dashboard",
+      "data": {
+        "menu": {
+          "title": "Dashboard",
+          "icon": "ion-android-home",
+          "selected": false,
+          "expanded": false,
+          "order": 0
+        }
+      }
+    },
+    {
+      "path": "report",
+      "data": {
+        "menu": {
+          "title": "Report",
+          "icon": "ion-android-laptop",
+          "selected": false,
+          "expanded": false,
+          "order": 300
+        }
+      },
+      "children": [
+        {
+          "path": "report1",
+          "data": {
+            "menu": {
+              "title": "Report1"
+            }
+          }
+        },
+        {
+          "path": "report2",
+          "data": {
+            "menu": {
+              "title": "Report2"
+            }
+          }
+        },
+        {
+          "path": "report3",
+          "data": {
+            "menu": {
+              "title": "Report3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "operation",
+      "data": {
+        "menu": {
+          "title": "Opertaion",
+          "icon": "ion-android-laptop",
+          "selected": false,
+          "expanded": false,
+          "order": 300
+        }
+      },
+      "children": [
+        {
+          "path": "operation1",
+          "data": {
+            "menu": {
+              "title": "VoC관리"
+            }
+          }
+        },
+        {
+          "path": "operation2",
+          "data": {
+            "menu": {
+              "title": "공지사항관리"
+            }
+          }
+        },
+        {
+          "path": "operation3",
+          "data": {
+            "menu": {
+              "title": "약관관리"
+            }
+          }
+        },
+        {
+          "path": "operation4",
+          "data": {
+            "menu": {
+              "title": "계약서관리"
+            }
+          }
+        },
+        {
+          "path": "operation3",
+          "data": {
+            "menu": {
+              "title": "CSS정책관리"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

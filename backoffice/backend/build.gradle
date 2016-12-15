@@ -1,0 +1,50 @@
+group 'com.skp.fintech'
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('org.springframework:springloaded:1.2.5.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'backoffice-backend'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1'
+
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    compile 'org.projectlombok:lombok'
+    compile 'org.modelmapper:modelmapper:0.7.3'
+    compile 'joda-time:joda-time:2.6'
+    compile 'com.sun.jersey:jersey-client:1.18.3'
+    compile 'com.skplanet.syruppay:syruppay-token:1.3.12'
+    compile 'mysql:mysql-connector-java'
+
+    compile group: 'org.json', name: 'json', version: '20160810'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

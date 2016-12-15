@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder name="enc" class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.skp.payment.p2plending.launcher.infra.log.PatternLayoutWithUserContext">
+                <param name="Pattern"
+                       value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr([%session]){magenta} %clr(--){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wex"/>
+            </layout>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+    <logger name="org.crsh.plugin" level="WARN"/>
+    <logger name="org.crsh.ssh" level="WARN"/>
+    <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="WARN"/>
+
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.apache.tomcat.util.http.Parameters" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>"/>
+    <logger name="org.springframework.boot.context.web.ErrorPageFilter" level="OFF"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="WARN"/>
+    <logger name="com.ahnlab.safetransaction.server.servlet.ASTXServlet" level="WARN"/>
+    <logger name="com.skplanet.payment.syruppay.infra.web.LoggingStrategyConfiguration" level="INFO"/>
+</configuration>

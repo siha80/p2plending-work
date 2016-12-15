@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+	<appender name="SERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>[%d{HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>p2plending-lending.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d{HH:mm:ss.SSS}] [%thread] %highlight%-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+
+	<!--<logger name="akka" level="DEBUG" >-->
+		<!--<appender-ref ref="SERVICE"/>-->
+		<!--<appender-ref ref="CONSOLE" />-->
+	<!--</logger>-->
+
+	<logger name="com.skp.payment.p2plending" level="DEBUG" additivity="false">
+		<appender-ref ref="SERVICE" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+	<!--<logger name="slf4j" level="DEBUG">-->
+		<!--<appender-ref ref="SERVICE" />-->
+		<!--<appender-ref ref="CONSOLE" />-->
+	<!--</logger>-->
+
+	<root level="DEBUG">
+		<appender-ref ref="SERVICE"/>
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+	<logger name="org.apache.kafka.clients" level="WARN">
+		<appender-ref ref="SERVICE" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+</configuration>
